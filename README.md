@@ -10,3 +10,4 @@
 截图：
   
   ![](https://github.com/mysteriousmy/college-match-sys/blob/main/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-04-21%20081009.png?raw=true)
+  ![](https://github.com/mysteriousmy/college-match-sys/blob/main/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-04-21%20081022.png?raw=true)
