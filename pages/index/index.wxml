@@ -1,0 +1,51 @@
+<!--index.wxml-->
+<scroll-view>
+  <view class="banner">
+    <swiper indicator-dots="{{banner.indicatorDots}}" autoplay="{{banner.autoplay}}" circular="{{banner.circular}}" vertical="{{banner.vertical}}" interval="{{banner.interval}}" duration="{{banner.duration}}" previous-margin="{{banner.previousMargin}}px" next-margin="{{banner.nextMargin}}px" style="height: 200px;">
+      <block wx:for='{{banner_list}}' wx:key='index'>
+        <swiper-item>
+          <view class="banner_cover">
+            <text>{{item.banner_title}}</text>
+          </view>
+          <image src='{{item.banner_url}}' mode='aspectFill' class='banner-item-images' />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="home_tool">
+    <view class="tool" data-type="0" bindtap="toSearchPage">
+      <image src="../../resource/search.png" />
+      <text>搜索</text>
+    </view>
+    <view data-type="2" class="tool" bindtap="toSearchPage">
+      <image src="../../resource/classes.png" />
+      <text>班级</text>
+    </view>
+
+    <view  data-type="3" class="tool" bindtap="toSearchPage">
+      <image src="../../resource/college.png" />
+      <text>学院</text>
+    </view>
+    <view  data-type="1" class="tool" bindtap="toSearchPage">
+      <image src="../../resource/alethtes.png" />
+      <text>运动员</text>
+    </view>
+  </view>
+  <view class="home_dynmic">
+    <view class="dynmic_title">
+      <image src="../../resource/news.png" />
+      <text>最新比赛动态</text>
+    </view>
+    <view class="none_data" wx:if="{{match_list.length === 0}}">暂无数据</view>
+    <block wx:if="{{match_list.length > 0}}">
+      <view class="dynmic_content" wx:for="{{match_list}}" data-id="{{item._id}}" wx:key="index" bindtap="goToDetailPage">
+        <image src="{{item.match_url}}" mode="aspectFill" />
+        <view>
+          <text>{{item.match_title}}</text>
+          <text style="color: {{item.status === 3 ? 'red' : 'green'}}">当前状态：{{item.status_text}}</text>
+          <text>{{item.match_desc}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</scroll-view>

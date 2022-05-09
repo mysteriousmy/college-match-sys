@@ -1,0 +1,187 @@
+<view class="editContent">
+    <view class="content">
+        <text>比赛名称：</text>
+        <input id="match_title" value="{{match_title}}" bindinput="inputChange" type="text" placeholder="请输入比赛名称" />
+    </view>
+    <view class="content">
+        <text>比赛简介信息：</text>
+        <input id="match_desc" value="{{match_desc}}" bindinput="inputChange" type="text" placeholder="请输入比赛简介信息" />
+    </view>
+    <view class="content">
+        <text>比赛当前状态：</text>
+        <text bindtap="selectStockOutType">{{select_status === "" ? "点击变更当前状态" : select_status}}</text>
+    </view>
+    <block wx:if="{{status === 0}}">
+        <view class="content">
+            <text>报名列表：</text>
+            <text data-type="0" bindtap="openModal">点击查看报名列表</text>
+        </view>
+    </block>
+    <block wx:if="{{status === 1}}">
+        <view class="content">
+            <text>待检录列表：</text>
+            <text data-type="1" bindtap="openModal">点击查看检录列表</text>
+        </view>
+    </block>
+    <block wx:if="{{status === 2 || status === 3}}">
+        <view class="content">
+            <text>待录分列表：</text>
+            <text data-type="2" bindtap="openModal">点击查看待录分列表</text>
+        </view>
+        <view class="content">
+            <text>照片组编辑：</text>
+            <text data-type="3" bindtap="openModal">点击编辑照片组</text>
+        </view>
+        <view class="content">
+            <text>视频组编辑：</text>
+            <text data-type="4" bindtap="openModal">点击编辑视频组</text>
+        </view>
+    </block>
+    <view class="content">
+        <text>比赛封面：</text>
+        <button data-count="1" bindtap="chooseImg" type="primary">上传图片</button>
+    </view>
+
+
+    <image style="margin-top:20px; height: 300px;" src="{{fileUrl}}" wx:if="{{showImage}}" mode="aspectFill"/>
+    <view class="content">
+        <button wx:if="{{!editOrAddFlag}}" bindtap="savematchData" type="primary" style="margin-right: 20px;">保存</button>
+        <button wx:if="{{editOrAddFlag}}" bindtap="updatematchData" type="primary" style="margin-right: 20px;">保存</button>
+        <button bindtap="disableSave" type="warn">取消</button>
+    </view>
+
+</view>
+<select id="select" options="{{options}}" topsHeight="{{topsHeight}}" opacity="{{opacity}}" IsSingle="{{IsSingle}}" bind:OnSelectFinish="SelectFinish"></select>
+
+<view class="modal" wx:if="{{showModalOfImage}}">
+    <view class="modal_head">
+        <button class="upload_btn" data-type="1" type="primary" bindtap="uploadFiles" data-count="10" bindtap="chooseImg">上传图片组</button>
+        <image class="close_btn" bindtap="closeModal" src="/resource/icon_close_gray.png" />
+    </view>
+
+    <scroll-view scroll-y class="scroll_modal">
+        <view class="none_data" wx:if="{{match_images.length === 0}}">暂无数据</view>
+        <block wx:if="{{match_images.length > 0}}">
+            <block wx:for="{{match_images}}">
+                <view class="match_content">
+                    <image src="{{item.img_url}}" mode="aspectFill"/>
+                    <view>
+                        <view>
+                            <button type="warn" data-id="{{item.img_id}}" bindtap="deletematchImage">删除</button>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </block>
+    </scroll-view>
+
+</view>
+<view class="modal" wx:if="{{showModalOfVideo}}">
+    <view class="modal_head">
+        <button class="upload_btn" data-type="2" type="primary" data-count="9" bindtap="chooseVideo">上传视频</button>
+        <image class="close_btn" bindtap="closeModal" src="/resource/icon_close_gray.png" />
+    </view>
+    <scroll-view scroll-y class="scroll_modal">
+        <view class="none_data" wx:if="{{match_videos.length === 0}}">暂无数据</view>
+        <block wx:if="{{match_videos.length > 0}}">
+            <block wx:for="{{match_videos}}">
+                <view class="match_content">
+                    <video style="height: 150px;" id="myVideo" src="{{item.video_url}}" binderror="videoErrorCallback" loop="true" controls="true"></video>
+                    <view>
+                        <view>
+                            <button type="warn" data-id="{{item.video_id}}" bindtap="deletematchVideo">删除</button>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </block>
+    </scroll-view>
+
+</view>
+
+<view class="modal" wx:if="{{showModalOfApply}}">
+    <view class="modal_head">
+        <view style="width: 40px;height: 40px;"></view>
+        <image class="close_btn" bindtap="closeModal" src="/resource/icon_close_gray.png" />
+    </view>
+    <scroll-view scroll-y class="scroll_modal">
+        <view class="none_data" wx:if="{{match_join_althetes.length === 0}}">暂无数据</view>
+        <block wx:if="{{match_join_althetes.length > 0}}">
+            <block wx:for="{{match_join_althetes}}">
+                <view class="match_content">
+                    <image src="{{item.althetes_photo}}" mode="aspectFill"/>
+                    <view style="display: flex; flex-direction: column;">
+                        <text style="color: grey;font-size: 20px;">{{item.althetes_name}}</text>
+                    </view>
+                    <view>
+                        <view>
+                            <button style="width: 100px;" type="warn" data-id="{{item.althetes_id}}" bindtap="deletematchApplyPeople">删除</button>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </block>
+    </scroll-view>
+</view>
+
+<view class="modal" wx:if="{{showModalOfCheck}}">
+    <view class="modal_head">
+        <view style="width: 40px;height: 40px;"></view>
+        <image class="close_btn" bindtap="closeModal" src="/resource/icon_close_gray.png" />
+    </view>
+    <scroll-view scroll-y class="scroll_modal">
+        <view class="none_data" wx:if="{{match_join_althetes.length === 0}}">暂无数据</view>
+        <block wx:if="{{match_join_althetes.length > 0}}">
+            <block wx:for="{{match_join_althetes}}">
+                <view class="match_content">
+                    <image src="{{item.althetes_photo}}" mode="aspectFill"/>
+                    <view style="display: flex; flex-direction: column;">
+                        <text style="color: grey;font-size: 20px;">{{item.althetes_name}}</text>
+                        <text style="color: grey;font-size: 13px">{{item.checkStatus}}</text>
+                        <text wx:if="{{item.failCheckText.length !== 0}}" style="color: grey;font-size: 13px">不通过检录原因：{{item.failCheckText}}</text>
+                    </view>
+                    <view>
+                        <view style="display: flex;flex-direction: column;">
+                            <button style="width: 100px;" type="primary" data-id="{{item.althetes_id}}" bindtap="trueCheck">通过</button>
+                            <button style="width: 100px;" type="warn" data-id="{{item.althetes_id}}" bindtap="falseCheck">不通过</button>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </block>
+    </scroll-view>
+</view>
+
+<view class="modal" wx:if="{{showModalOfSource}}">
+    <view class="modal_head">
+        <view style="width: 40px;height: 40px;"></view>
+        <image class="close_btn" bindtap="closeModal" src="/resource/icon_close_gray.png" />
+    </view>
+    <scroll-view scroll-y class="scroll_modal">
+        <view class="none_data" wx:if="{{match_join_althetes.length === 0}}">暂无数据</view>
+        <block wx:if="{{match_join_althetes.length > 0}}">
+            <block wx:for="{{match_join_althetes}}">
+                <view class="match_content">
+                    <image src="{{item.althetes_photo}}" mode="aspectFill"/>
+                    <view style="display: flex; flex-direction: column;">
+                        <text style="color: grey;font-size: 20px;">{{item.althetes_name}}</text>
+                        <text>成绩：{{item.source}}分</text>
+                    </view>
+                    <view>
+                        <view style="display: flex;flex-direction: column;">
+                            <button style="width: 100px;" type="primary" data-id="{{item.althetes_id}}" bindtap="editSource">改分数</button>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </block>
+    </scroll-view>
+</view>
+<view class="float_edit" wx:if="{{showEditModal}}">
+    <textarea wx:if="{{temp_type === 0}}" bindinput="inputChange" id="edit" style="border:1px solid rgba(0,0,0,0.3); border-radius: 10px;margin-bottom: 20px;" type="text" placeholder="请输入" value="{{temp_text}}"></textarea>
+    <input id="edit_num"  type="number" wx:if="{{temp_type === 1}}" bindinput="inputChange" style="border:1px solid rgba(0,0,0,0.3); border-radius: 10px;margin-bottom: 20px;" value="{{temp_text}}" />
+    <view style="display: flex; flex-direction: row;">
+        <button type="primary" bindtap="submitEdit">提交</button>
+        <button type="warn" bindtap="cancelEdit">取消</button>
+    </view>
+</view>

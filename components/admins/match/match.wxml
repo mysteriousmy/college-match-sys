@@ -1,0 +1,26 @@
+<!--components/admins/match/match.wxml-->
+
+<view class="content">
+    <view class="content_title">
+      <image src="/resource/match_color.png" />
+      <text>比赛列表</text>
+    </view>
+    <view class="none_data" wx:if="{{match_list.length === 0}}">暂无数据</view>
+    <block wx:else="{{match_list.length > 0}}">
+        <block wx:for="{{match_list}}" wx:key="index">
+            <view class="match_content">
+                <image src="{{item.match_url}}" mode="aspectFill"/>
+                <view>
+                    <text>{{item.match_title}}</text>
+                    <view>
+                        <button type="primary" style="margin-right: 10px;" data-id="{{item._id}}" bindtap="editmatch">编辑</button>
+                        <button type="warn" data-id="{{item._id}}" bindtap="deletematch">删除</button>
+                    </view>
+                </view>
+                
+            </view>
+        </block>
+        
+    </block>
+</view>
+<view class="circle_add" bindtap="toAddmatchPage">+</view>

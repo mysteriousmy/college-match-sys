@@ -1,0 +1,26 @@
+<!--components/admins/althetes/althetes.wxml-->
+
+<view class="content">
+    <view class="content_title">
+      <image src="/resource/alethtes.png" />
+      <text>运动员列表</text>
+    </view>
+    <view class="none_data" wx:if="{{althetes_list.length === 0}}">暂无数据</view>
+    <block wx:else="{{althetes_list.length > 0}}">
+        <block wx:for="{{althetes_list}}" wx:key="index">
+            <view class="althetes_content">
+                <image src="{{item.althetes_url}}" mode="aspectFill"/>
+                <view>
+                    <text>{{item.althetes_name}}</text>
+                    <view>
+                        <button type="primary" style="margin-right: 10px;" data-id="{{item._id}}" bindtap="editalthetes">编辑</button>
+                        <button type="warn" data-id="{{item._id}}" bindtap="deletealthetes">删除</button>
+                    </view>
+                </view>
+                
+            </view>
+        </block>
+        
+    </block>
+</view>
+<view class="circle_add" bindtap="toAddalthetesPage">+</view>

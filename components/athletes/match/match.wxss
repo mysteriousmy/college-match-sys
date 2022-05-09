@@ -1,0 +1,190 @@
+.search_bar{
+    background-color:#ffffff;
+    border-radius: 6px;
+    width: 81%;
+    height: auto;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+    display: flex;
+    padding: 20px;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.search_bar image{
+    display: inline;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+.search_bar input{
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+}
+.search_bar button{
+    background-color: pink;
+    color: white;
+    font-weight: 200;
+    width: 90px;
+    height: 40px;
+    margin-left: 10px;
+}
+
+.search_result{
+    background-color:#ffffff;
+    border-radius: 6px;
+    width: 81%;
+    height: auto;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+    display: flex;
+    padding: 20px;
+    padding-bottom: 30px;
+    flex-direction: column;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.dynmic_title{
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+}
+.dynmic_title image{
+    width: 35px;
+    height: 35px;
+    display: inline;
+    
+    margin-right: 5px;
+}
+.dynmic_content{
+    margin-top: 20px;
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 20px;
+}
+.dynmic_content image{
+    width: 150px;
+    height: 100px;
+    box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+}
+.dynmic_content view{
+    margin-left: 10px;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+}
+.dynmic_content view>text:nth-child(4){
+  display: -webkit-box;  /*设置为弹性盒子*/
+  -webkit-line-clamp: 3;  /*最多显示5行*/
+  overflow: hidden;  /*超出隐藏*/
+  text-overflow: ellipsis;  /*超出显示为省略号*/
+  -webkit-box-orient: vertical;
+  word-break: break-all;  /*强制英文单词自动换行*/
+}
+.dynmic_content view>text:nth-child(1){
+    font-weight: 900;
+    font-size: 20px;
+    display:-webkit-box;
+    -webkit-line-clamp:1;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    -webkit-box-orient:vertical;
+    word-break:break-all;
+}
+.none_data{
+    text-align: center;
+    padding: 40px;
+    height: 40px;
+    font-size: 25px;
+    color: rgba(0, 0, 0, 0.3);
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding-bottom: 40px;
+  }
+  
+  .modal_head {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .modal_content_head{
+      padding:10px;
+      display: flex;
+      flex-direction: column;
+      margin-top:20px;
+      margin-bottom: 30px;
+  }
+  .modal_content_head image{
+      width: 100%;
+  }
+ .modal_content{
+      display: flex;
+      flex-direction: column;
+      padding:10px;
+  }
+  .modal_desc{
+    display: -webkit-box; 
+    -webkit-line-clamp: 3; 
+    overflow: hidden;  
+    text-overflow: ellipsis; 
+    -webkit-box-orient: vertical;
+    word-break: break-all; 
+  }
+  .scroll_modal {
+    height: 80%;
+    width: 90%;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+  }
+  
+  .upload_btn {
+    height: 40px;
+    margin-left: 20px !important;
+  }
+  
+  .float_edit {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 300px;
+    height: 200px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .close_btn {
+    margin: 20px;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    z-index: 9999;
+  }

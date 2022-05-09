@@ -1,0 +1,52 @@
+<view class="editContent">
+    <view class="content">
+        <text>运动员姓名：</text>
+        <input id="althetes_name" value="{{althetes_name}}" bindinput="inputChange" type="text" placeholder="请输入运动员姓名" />
+    </view>
+    <view class="content">
+        <text>性别：</text>
+        <radio-group bindchange="genderChange">
+            <radio color="red" value="男" checked="{{althetes_gender === '男'}}">男</radio>
+            <radio color="red" value="女" checked="{{althetes_gender === '女'}}">女</radio>
+        </radio-group>
+    </view>
+    <view class="content">
+        <text>运动员初始登录密码：</text>
+        <input id="althetes_password" value="{{althetes_password}}" bindinput="inputChange" type="text" placeholder="（可不填）默认12345678" />
+    </view>
+    <view class="content">
+        <text>运动员身高(厘米)：</text>
+        <input id="althetes_high" value="{{althetes_high}}" bindinput="inputChange" type="number" placeholder="请输入运动员身高" />
+    </view>
+    <view class="content">
+        <text>运动员体重(公斤)：</text>
+        <input id="althetes_weight" value="{{althetes_weight}}" bindinput="inputChange" type="number" placeholder="请输入运动员体重" />
+    </view>
+    <view class="content">
+        <text>运动员擅长项目：</text>
+        <input id="althetes_adept" value="{{althetes_adept}}" bindinput="inputChange" type="text" placeholder="请输入运动员擅长的体育项目" />
+    </view>
+    <view class="content">
+        <text>运动员简介：</text>
+        <input id="althetes_desc" value="{{althetes_desc}}" bindinput="inputChange" type="text" placeholder="请输入运动员信息（非必要）" />
+    </view>
+    <view class="content">
+        <text>所属班级：</text>
+        <text bindtap="selectStockOutType">{{select_class === "" ? "点击选择所属班级" : select_class}}</text>
+     
+    </view>
+    <view class="content">
+        <text>照片文件：</text>
+        <button bindtap="chooseImg" type="primary" >上传图片</button>
+    </view>
+
+    
+    <image style="margin-top:20px; height: 300px;" src="{{fileUrl}}" wx:if="{{showImage}}" mode="aspectFill"/>
+    <view class="content">
+        <button wx:if="{{!editOrAddFlag}}" bindtap="saveAlthetesData" type="primary" style="margin-right: 20px;">保存</button>
+        <button wx:if="{{editOrAddFlag}}" bindtap="updateAlthetesData" type="primary" style="margin-right: 20px;">保存</button>
+        <button bindtap="disableSave" type="warn">取消</button>
+    </view>
+
+</view>
+<select id="select" options="{{options}}"  topsHeight="{{topsHeight}}" opacity="{{opacity}}" IsSingle="{{IsSingle}}" bind:OnSelectFinish="SelectFinish"></select>

@@ -1,0 +1,47 @@
+<!--components/athletes/match/match.wxml-->
+<scroll-view>
+    <view class="search_bar">
+        <image src="/resource/search_single.png"></image>
+        <input bindinput="inputChange" value="{{seach_word}}" type="text" placeholder="请输入比赛关键字" />
+        <button bindtap="seachMatchData">搜索</button>
+    </view>
+    <view class="search_result">
+        <view class="dynmic_title">
+            <image src="/resource/match_color.png" />
+            <text>可报名的比赛</text>
+        </view>
+        <view class="none_data" wx:if="{{match_data.length === 0}}">暂无数据</view>
+        <block wx:else="{{match_data.length > 0}}">
+            <block wx:for="{{match_data}}" wx:key="index">
+                <view class="dynmic_content" data-id="{{item.id}}" data-status="{{item.match_status}}" data-check="{{item.match_check}}" bindtap="openMatchModal">
+                    <image src="{{item.match_url}}" mode="aspectFill"/>
+                    <view>
+                        <text>{{item.match_title}}</text>
+                        <text style="color: {{item.status === '已报名' ? 'green' : 'red' }};font-size: 13px;">{{item.status}}</text>
+                        <text style="color: {{item.match_check === '未通过' ? 'red' : (item.match_check === '检录中' ? 'orange' : 'green')}};font-size: 13px;" wx:if="{{item.match_check.length > 0}}">检录状态：{{item.match_check !== '未通过' ? item.match_check : '未通过，查看详情'}}</text>
+                        <text class="modal_desc">{{item.match_desc}}</text>
+                    </view>
+                </view>
+            </block>
+        </block>
+    </view>
+</scroll-view>
+
+<view class="modal" wx:if="{{showModalOfMatch}}">
+    <view class="modal_head">
+        <view style="width: 40px;height: 40px;"></view>
+        <image class="close_btn" bindtap="closeModal" src="/resource/icon_close_gray.png" />
+    </view>
+    <scroll-view scroll-y class="scroll_modal">
+            <view class="modal_content_head">
+                <image src="{{match_data_real.match_url}}" mode="aspectFill"/>
+                <text style="font-weight: 900; font-size: 25px;">{{match_data_real.match_title}}</text>
+                <text style="font-size: 15px;">发布时间：{{match_data_real.match_time}} 报名人数:{{match_data_real.join_num}}</text>
+            </view>
+            <view class="modal_content">
+                <text style="margin-bottom: 40px;">比赛简介：{{match_data_real.match_desc}}</text>
+                <button type="primary" bindtap="joinThis" data-id="{{match_data_real.id}}" wx:if="{{match_data_real.status === '未报名'}}">报名</button>
+                <button type="warn" bindtap="cancelThis" data-id="{{match_data_real.id}}" wx:if="{{match_data_real.status === '已报名'}}">取消报名</button>
+            </view>
+    </scroll-view>
+</view>

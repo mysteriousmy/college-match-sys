@@ -1,0 +1,19 @@
+<view class="load" wx:if="{{!loginOk}}">
+    <image src="../../resource/my.png" bindtap="load"></image>
+    <text class="clickload" bindtap="load">点击登录</text>
+</view>
+<!--已登录-->
+<view wx:else>
+    <view class="load">
+        <image src="{{avatarUrl}}"></image>
+        <text class="clickload">{{nickName}}</text>
+    </view>
+</view>
+<view class="list_card">
+    <button class="btn" style="width: 100%;" wx:if="{{loginOk}}" hover-class="btn-hover" bindtap="toCommentPage">我的评论</button>
+    <button class="btn" style="width: 100%;" wx:if="{{loginOk}}" hover-class="btn-hover" bindtap="toCollectPage">我的关注赛事</button>
+    <button class="btn" style="width: 100%;" hover-class="btn-hover" bindtap="athletesLogin">运动员入口</button>
+    <button class="btn" style="width: 100%;" hover-class="btn-hover" bindtap="adminsLogin">管理员入口</button>
+    <button class="btn" style="width: 100%;" hover-class="btn-hover" bindtap="about">关于</button>
+    <button class="btn" style="width: 100%;" hover-class="btn-hover" wx:if="{{loginOk}}" bindtap="exit">退出登录</button>
+</view>

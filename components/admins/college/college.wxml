@@ -1,0 +1,26 @@
+<!--components/admins/college/college.wxml-->
+
+<view class="content">
+    <view class="content_title">
+      <image src="/resource/college.png" />
+      <text>学院列表</text>
+    </view>
+    <view class="none_data" wx:if="{{college_list.length === 0}}">暂无数据</view>
+    <block wx:else="{{college_list.length > 0}}">
+        <block wx:for="{{college_list}}" wx:key="index">
+            <view class="college_content">
+                <image src="{{item.college_url}}" mode="aspectFill"/>
+                <view>
+                    <text>{{item.college_name}}</text>
+                    <view>
+                        <button type="primary" style="margin-right: 10px;" data-id="{{item._id}}" bindtap="editCollege">编辑</button>
+                        <button type="warn" data-id="{{item._id}}" bindtap="deleteCollege">删除</button>
+                    </view>
+                </view>
+                
+            </view>
+        </block>
+        
+    </block>
+</view>
+<view class="circle_add" bindtap="toAddCollege">+</view>

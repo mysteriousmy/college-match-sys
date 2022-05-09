@@ -1,0 +1,19 @@
+<view class="selectComponent" style="height:{{topsHeight}};bottom: -{{topsHeight}};" wx:if="{{isShow}}" animation="{{contentAnimate}}">
+<image src="/resource/icon_close_gray.png" class="close" catchtap="_close"></image>
+  <view class="select-ul">
+    <view class="select-li" wx:for="{{options}}">
+      {{item.Text}}
+      <block wx:if="{{IsSingle}}">
+        <view class="checkbox {{item.Selected ? 'singlechecked' : 'singleunchecked'}}" data-index="{{index}}" bindtap="_setSelect"></view>
+      </block>
+      <block wx:else>
+        <view data-single="{{IsSingle}}" class="checkbox {{item.Selected ? 'checked' : 'unchecked'}}" data-index="{{index}}" bindtap="_setSelect"></view>
+      </block>
+    </view>
+  </view>
+  <view class="SubmitBtn" bindtap="_submit">
+    确 定
+  </view>
+</view>
+<!-- 遮罩层 -->
+<view class="overlay" catchtap ="_close" wx:if="{{isShow}}" animation="{{overlayAnimate}}"></view>

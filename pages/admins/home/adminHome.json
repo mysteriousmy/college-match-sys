@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "match": "/components/admins/match/match",
+    "banner": "/components/admins/banner/banner",
+    "college": "/components/admins/college/college",
+    "classes": "/components/admins/classes/classes",
+    "althetes": "/components/admins/althetes/althetes"
+  },
+  "navigationBarTitleText": "高校运动会比赛管理系统"
+}

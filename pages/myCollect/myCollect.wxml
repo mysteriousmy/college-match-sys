@@ -1,0 +1,16 @@
+<view class="home_dynmic">
+    <view class="dynmic_title">
+      <image src="../../resource/focus.png" />
+      <text>关注列表</text>
+    </view>
+    <view class="none_data" wx:if="{{match_list.length === 0}}">暂无数据</view>
+    <block wx:if="{{match_list.length > 0}}">
+      <view class="dynmic_content" wx:for="{{match_list}}" data-id="{{item._id}}" wx:key="index" bindtap="goToDetailPage">
+        <image src="{{item.match_url}}" mode="aspectFill" />
+        <view>
+          <text class="match_title">{{item.match_title}}</text>
+          <text class="match_desc">{{item.match_desc}}</text>
+        </view>
+      </view>
+    </block>
+  </view>

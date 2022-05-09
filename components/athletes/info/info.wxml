@@ -1,0 +1,29 @@
+<!--components/athletes/info/info.wxml-->
+<view class="header">
+    <image src="{{althetes_info.althetes_url}}" />
+</view>
+<view class="info">
+    <view class="text_info">
+        <text>姓名：{{althetes_info.althetes_name}}</text>
+        <text>性别：{{althetes_info.althetes_gender}}</text>
+    </view>
+    <view class="text_info">
+        <text>身高：{{althetes_info.althetes_high}}cm</text>
+        <text>体重：{{althetes_info.althetes_weight}}斤</text>
+    </view>
+    <view class="text_info">
+        <text>擅长：{{althetes_info.althetes_adept}}</text>
+        <text>总积分：{{all_source}}</text>
+    </view>
+    <view class="text_info">
+        <text>班级：{{althetes_info.althetes_ofClass}}</text>
+        <text>学院：{{althetes_info.althetes_ofCollege}}</text>
+    </view>
+    <view class="text_info_long">
+        <text>简介：{{althetes_info.althetes_desc.length === 0 ? '这个人很懒，没有自我介绍':althetes_info.althetes_desc}}</text>
+    </view>
+</view>
+<view class="btn">
+    <button type="primary" bindtap="updateInfo" style="margin-right: 30px;">修改信息</button>
+    <button type="warn" bindtap="exitLogin">退出登录</button>
+</view>

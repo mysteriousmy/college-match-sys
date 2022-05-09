@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "match": "/components/athletes/match/match",
+    "info": "/components/athletes/info/info",
+    "source": "/components/athletes/source/source"
+  },
+  "navigationBarTitleText": "运动员自我管理系统"
+}

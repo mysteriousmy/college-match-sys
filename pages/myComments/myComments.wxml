@@ -1,0 +1,18 @@
+<view class="home_dynmic">
+    <view class="dynmic_title">
+      <image src="../../resource/focus.png" />
+      <text>评论列表</text>
+    </view>
+    <view class="none_data" wx:if="{{comment_list.length === 0}}">暂无数据</view>
+    <block wx:if="{{comment_list.length > 0}}">
+      <view class="dynmic_content" wx:for="{{comment_list}}" wx:key="index" >
+        <image src="{{item.comment_url}}" mode="aspectFill" />
+        <view style="display: flex; flex-direction: column;">
+          <text data-id="{{item.id}}" bindtap="gotoDetail">你在 <text style="color: orangered;" class="comment_title">{{item.match_title}}</text> 发表了：</text>
+          <text class="comment_desc">{{item.comments_content}}</text>
+          <text>发表时间:{{item.comments_time}}</text>
+          <button type="warn" bindtap="deleteComment" data-id="{{item.comment_id}}" data-tid="{{item.id}}">删除</button>
+        </view>
+      </view>
+    </block>
+  </view>

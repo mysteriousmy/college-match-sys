@@ -1,0 +1,44 @@
+<!--pages/sort/sort.wxml-->
+<view class="header_tool">
+  <view class="home_tool">
+    <view class="tool" data-type="1" bindtap="getSortData">
+      <image src="../../resource/alethtes.png" />
+      <text style="color: {{type === 1 ? 'pink' : 'black'}};">运动员</text>
+    </view>
+    <view class="tool" data-type="2" bindtap="getSortData">
+      <image src="../../resource/classes.png" />
+      <text style="color: {{type === 2 ? 'pink' : 'black'}};">班级</text>
+    </view>
+
+    <view class="tool" data-type="3" bindtap="getSortData">
+      <image src="../../resource/college.png"/>
+      <text style="color: {{type === 3 ? 'pink' : 'black'}};">学院</text>
+    </view>
+
+  </view>
+</view>
+<view class="sort_content">
+  <scroll-view id="sort" scroll-y class="sort_data">
+    <view>
+      <view class="none_data" wx:if="{{sort_data.length === 0}}">暂无数据</view>
+      <block wx:if="{{sort_data.length !== 0}}">
+        <block wx:for="{{sort_data}}" wx:key="index">
+          <view class="uni_content" data-id="{{item.id}}" bindtap="openAlthetesMoal">
+            <view style="display: flex;align-items: center;">
+              <view style="margin-right: 10px; display: flex; flex-direction: row; justify-content: center;">
+                <image class="prize" src="/resource/1.png" wx:if="{{(index+1) === 1}}"></image>
+                <image class="prize" src="/resource/2.png" wx:if="{{(index+1) === 2}}"></image>
+                <image class="prize" src="/resource/3.png" wx:if="{{(index+1) === 3}}"></image>
+                <text style="font-weight: 900;font-size: 20px;">{{index+1}}</text>
+              </view>
+              
+              <image src="{{item.sort_photo}}" mode="aspectFill" />
+              <text style="font-weight: 900; font-size: 17px;margin-left: 20px;">{{item.sort_name}}</text>
+            </view>
+            <text>总积分：{{item.sort_source}}</text>
+          </view>
+        </block>
+      </block>
+    </view>
+ </scroll-view>
+</view>

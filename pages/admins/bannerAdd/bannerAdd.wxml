@@ -1,0 +1,32 @@
+<view class="editContent">
+    <view class="content">
+        <text>Banner标题：</text>
+        <input value="{{banner_title}}" bindinput="titleChange" type="text" placeholder="请输入Banner标题" />
+    </view>
+    <view class="content">
+        <text>Banner图片类型：</text>
+        <radio-group bindchange="bandleChange">
+            <radio color="red" value="url" checked="true">在线地址</radio>
+            <radio color="red" value="file">上传文件</radio>
+        </radio-group>
+    </view>
+    <block wx:if="{{banner_type}}">
+        <view class="content">
+            <text>Banner地址：</text>
+            <input value="{{fileUrl}}" bindinput="urlChange" type="text" placeholder="请输入Banner在线图片地址" />
+        </view>
+    </block>
+    <block wx:if="{{!banner_type}}">
+        <view class="content">
+            <text>Banner文件：</text>
+            <button bindtap="chooseImg" type="primary" >上传图片</button>
+        </view>
+    </block>
+    <image style="margin-top:20px; height: 300px;" src="{{fileUrl}}" wx:if="{{showImage}}" mode="aspectFill"/>
+    <view class="content">
+        <button wx:if="{{!editOrAddFlag}}" bindtap="saveBannerData" type="primary" style="margin-right: 20px;">保存</button>
+        <button wx:if="{{editOrAddFlag}}" bindtap="updateBannerData" type="primary" style="margin-right: 20px;">保存</button>
+        <button bindtap="disableSave" type="warn">取消</button>
+    </view>
+
+</view>

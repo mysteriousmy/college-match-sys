@@ -1,0 +1,147 @@
+<!--pages/detail/detail.wxml-->
+<view class="head">
+    <view class="head_img" wx:if="{{match.match_images.length === 0}}">
+        <image src="{{match.match_url}}" mode="aspectFill" />
+    </view>
+    <view class="banner" wx:if="{{match.match_images.length !== 0}}">
+        <swiper indicator-dots="{{banner.indicatorDots}}" autoplay="{{banner.autoplay}}" circular="{{banner.circular}}" vertical="{{banner.vertical}}" interval="{{banner.interval}}" duration="{{banner.duration}}" previous-margin="{{banner.previousMargin}}px" next-margin="{{banner.nextMargin}}px" style="height: 300px;">
+            <block wx:for='{{match.match_images}}' wx:key='index'>
+                <swiper-item>
+                    <image src='{{item.img_url}}' mode='aspectFill' class='banner-item-images' />
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+</view>
+<view class="title">
+    <text style="font-weight: 900; font-size: 25px;">{{match.match_title}}</text>
+    <text>发布时间：{{match.match_time}} 动态评论数({{match.match_comments.length}})</text>
+</view>
+<view class="home_tool">
+    <view class="tool" bindtap="search">
+        <image src="../../resource/status.png" />
+        <text>状态</text>
+        <text>{{match.status_text}}</text>
+    </view>
+    <view class="tool">
+        <image src="../../resource/classes.png" />
+        <text>班级</text>
+        <text>{{classes.length}}个</text>
+    </view>
+
+    <view class="tool">
+        <image src="../../resource/college.png" />
+        <text>学院</text>
+        <text>{{colleges.length}}个</text>
+    </view>
+    <view class="tool">
+        <image src="../../resource/alethtes.png" />
+        <text>运动员</text>
+        <text>{{match.althetes_num}}名</text>
+    </view>
+</view>
+<view id="desc" class="uni_content">
+    <view class="uni_content_title">
+        <image src="../../resource/desc.png" />
+        <text>比赛简介</text>
+    </view>
+    <text style="margin-top:20px;">{{match.match_desc}}</text>
+</view>
+<view id="video" class="uni_content">
+    <view class="uni_content_title">
+        <image src="../../resource/video_color.png" />
+        <text>比赛视频</text>
+    </view>
+    <view style="display: flex; flex-direction: column; align-items: center;margin-top: 20px;">
+        <view class="none_data" wx:if="{{match.match_videos.length === 0}}">暂无数据</view>
+        <block wx:if="{{match.match_videos.length !== 0}}">
+            <view wx:for="{{match.match_videos}}" wx:key="index">
+                <video style="height: 150px;" id="myVideo" src="{{item.video_url}}" binderror="videoErrorCallback" loop="true" controls="true"></video>
+            </view>
+        </block>
+    </view>
+</view>
+<view id="sort" class="uni_content">
+    <view class="uni_content_title">
+        <image src="../../resource/sort_color.png" />
+        <text>比赛结果</text>
+    </view>
+    <view>
+        <view class="none_data" wx:if="{{sort_data.length === 0}}">暂无数据</view>
+        <block wx:if="{{sort_data.length !== 0}}">
+                <block wx:for="{{sort_data}}" wx:key="index">
+                    <view class="modal_content_head" data-id="{{item.id}}" bindtap="openAlthetesMoal">
+                        <view style="display: flex;align-items: center;">
+                            <text style="font-weight: 900;font-size: 20px;margin-right: 20px;">{{index+1}}</text>
+                            <image src="{{item.althetes_photo}}" mode="aspectFill" />
+                            <text style="font-weight: 900; font-size: 25px;">{{item.althetes_name}}</text>
+                        </view>
+                        <text>成绩：{{item.source}}</text>
+                    </view>
+                </block>
+        </block>
+    </view>
+</view>
+<view id="comments" class="uni_content">
+    <view class="uni_content_title">
+        <image src="../../resource/comments.png" />
+        <text>比赛评论</text>
+    </view>
+    <view>
+        <view class="none_data" wx:if="{{match.match_comments.length === 0}}">暂无数据</view>
+        <block wx:if="{{match.match_comments.length !== 0}}">
+            <view style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center;margin-top: 20px;" wx:for="{{match.match_comments}}" wx:key="index">
+                    <image style="border-radius: 50%; width: 80px; height: 80px;margin-right: 10px;" src="{{item.comments_user_photo}}" />
+                    <view style="display: flex; flex-direction: column;">
+                        <text>{{item.comments_user_name}}</text>
+                    <text>{{item.comments_content}}</text>
+                    <text style="font-size: 13px; color: rgba(0,0,0,0.3);">发表时间：{{item.comments_time}}</text>
+            </view>
+            </view>
+        </block>
+    </view>
+</view>
+<view class="focus" data-id="{{match._id}}" bindtap="focusThisMatch">
+{{isFocus ? '×' : '+'}}
+</view>
+<view class="comment" data-id="{{match._id}}" bindtap="pubComments">
+    <image src="/resource/edit.png" mode="aspectFill"></image>
+</view>
+
+<view class="float_edit" wx:if="{{showEditModal}}">
+    <textarea bindinput="inputChange" id="edit" style="border:1px solid rgba(0,0,0,0.3); border-radius: 10px;margin-bottom: 20px;" type="text" placeholder="请输入评论，友好交流哦" value="{{temp_text}}"></textarea>
+    <view style="display: flex; flex-direction: row;">
+        <button type="primary" bindtap="submitEdit">提交</button>
+        <button type="warn" bindtap="cancelEdit">取消</button>
+    </view>
+</view>
+
+<view class="modal modal_ath" wx:if="{{showModalOfAlthetes}}">
+    <scroll-view style="margin-top: 60px" scroll-y class="scroll_modal">
+        <view class="header">
+            <image src="{{althetes_modal_info.althetes_url}}" mode="aspectFill"/>
+        </view>
+        <view class="info">
+            <view class="text_info">
+                <text>姓名：{{althetes_modal_info.althetes_name}}</text>
+                <text>性别：{{althetes_modal_info.althetes_gender}}</text>
+            </view>
+            <view class="text_info">
+                <text>身高：{{althetes_modal_info.althetes_high}}cm</text>
+                <text>体重：{{althetes_modal_info.althetes_weight}}斤</text>
+            </view>
+            <view class="text_info">
+                <text>擅长：{{althetes_modal_info.althetes_adept}}</text>
+                <text>总积分：{{althetes_modal_info.all_source}}</text>
+            </view>
+            <view class="text_info">
+                <text>班级：{{althetes_modal_info.althetes_ofClass}}</text>
+                <text>学院：{{althetes_modal_info.althetes_ofCollege}}</text>
+            </view>
+            <view class="text_info">
+                <text>简介：{{althetes_modal_info.althetes_desc.length === 0 ? '这个人很懒，没有自我介绍':althetes_modal_info.althetes_desc}}</text>
+            </view>
+            <button style="margin-top: 20px;" type="primary" bindtap="closeAthModal">关闭</button>
+        </view>
+    </scroll-view>
+</view>

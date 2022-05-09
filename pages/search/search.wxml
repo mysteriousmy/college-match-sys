@@ -1,0 +1,99 @@
+<!--pages/search/search.wxml-->
+<view class="search_bar">
+    <image src="/resource/search_single.png"></image>
+    <input bindinput="inputChange" value="{{search_word}}" type="text" placeholder="请输入{{search_type}}关键字" />
+    <button bindtap="seachData">搜索</button>
+</view>
+
+<view id="sort" class="uni_content">
+    <view class="uni_content_title">
+        <image src="../../resource/search.png" />
+        <text>搜索结果</text>
+    </view>
+    <scroll-view>
+        <view class="none_data" wx:if="{{search_data.length === 0}}">搜索结果在这哦</view>
+        <block wx:if="{{search_data.length !== 0}}">
+                <view class="dynmic_content" wx:for="{{search_data}}" data-id="{{item.id}}" data-type="{{item.type}}"wx:key="index" bindtap="goToSearchResult">
+                    <image src="{{item.images}}" mode="aspectFill" />
+                    <view>
+                        <text>{{item.data_title}}</text>
+                        <text style="color: {{item.status === 3 ? 'red' : 'green'}}" wx:if="{{item.status}}">当前状态：{{item.status_text}}</text>
+                        <text>{{item.data_text}}</text>
+                    </view>
+                </view>
+        </block>
+    </scroll-view>
+</view>
+
+<view class="modal modal_ath" wx:if="{{showModalOfAlthetes}}">
+    <scroll-view style="margin-top: 60px" scroll-y class="scroll_modal">
+        <view class="header">
+            <image src="{{althetes_modal_info.althetes_url}}" mode="aspectFill"/>
+        </view>
+        <view class="info">
+            <view class="text_info">
+                <text>姓名：{{althetes_modal_info.althetes_name}}</text>
+                <text>性别：{{althetes_modal_info.althetes_gender}}</text>
+            </view>
+            <view class="text_info">
+                <text>身高：{{althetes_modal_info.althetes_high}}cm</text>
+                <text>体重：{{althetes_modal_info.althetes_weight}}斤</text>
+            </view>
+            <view class="text_info">
+                <text>擅长：{{althetes_modal_info.althetes_adept}}</text>
+                <text>总积分：{{althetes_modal_info.all_source}}</text>
+            </view>
+            <view class="text_info">
+                <text>班级：{{althetes_modal_info.althetes_ofClass}}</text>
+                <text>学院：{{althetes_modal_info.althetes_ofCollege}}</text>
+            </view>
+            <view class="text_info">
+                <text>简介：{{althetes_modal_info.althetes_desc.length === 0 ? '这个人很懒，没有自我介绍':althetes_modal_info.althetes_desc}}</text>
+            </view>
+            <button style="margin-top: 20px;" type="primary" bindtap="closeAthModal">关闭</button>
+        </view>
+    </scroll-view>
+</view>
+<view class="modal modal_ath" wx:if="{{showModalOfClasses}}">
+    <scroll-view style="margin-top: 60px" scroll-y class="scroll_modal">
+        <view class="header">
+            <image src="{{classes_modal_info.class_url}}" mode="aspectFill"/>
+        </view>
+        <view class="info">
+            <view class="text_info">
+                <text>班级名称：{{classes_modal_info.class_name}}</text>
+                <text>所属学院：{{classes_modal_info.class_ofCollege}}</text>
+            </view>
+            <view class="text_info">
+                <text>运动员数：{{classes_modal_info.class_athnum}}名</text>
+                <text>总积分：{{classes_modal_info.class_source}}分</text>
+            </view>
+            <view class="text_info">
+                <text>简介：{{classes_modal_info.class_desc.length === 0 ? '这个班级很懒，没有自我介绍':classes_modal_info.class_desc}}</text>
+            </view>
+            <button style="margin-top: 20px;" type="primary" bindtap="closeClassModal">关闭</button>
+        </view>
+    </scroll-view>
+</view>
+<view class="modal modal_ath" wx:if="{{showModalOfCollege}}">
+    <scroll-view style="margin-top: 60px" scroll-y class="scroll_modal">
+        <view class="header">
+            <image src="{{college_modal_info.college_url}}" mode="aspectFill"/>
+        </view>
+        <view class="info">
+            <view class="text_info">
+                <text>学院名称：{{college_modal_info.college_name}}</text>
+                <text>学院班级数：{{college_modal_info.college_classnum}}</text>
+            </view>
+            <view class="text_info">
+                <text>学院运动员数：{{college_modal_info.college_athnum}}名</text>
+                <text>总积分：{{college_modal_info.college_source}}分</text>
+            </view>
+
+            <view class="text_info">
+                <text>简介：{{college_modal_info.college_desc.length === 0 ? '学院没有介绍信息':college_modal_info.college_desc}}</text>
+            </view>
+            <button style="margin-top: 20px;" type="primary" bindtap="closeCollegeModal">关闭</button>
+        </view>
+    </scroll-view>
+</view>

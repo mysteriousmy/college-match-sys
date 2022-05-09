@@ -1,0 +1,9 @@
+<!--pages/athletes/login/athletesLogin.wxml-->
+<view class="login_container" style="background-image: url(../img/background.jpg);">
+    <view class="login_form">
+        <text>欢迎使用，运动员请登录</text>
+        <input bindinput="inputedit" id="athletes_name" type="text" placeholder="请输入运动员登录名" />
+        <input bindinput="inputedit" id="athletes_password" type="password" placeholder="请输入运动员密码" />
+        <button class="login_btn" bindtap="doLogin">登录</button>
+    </view>
+</view>

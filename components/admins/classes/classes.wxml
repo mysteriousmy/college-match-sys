@@ -1,0 +1,27 @@
+<!--components/admins/classes/classes.wxml-->
+
+<view class="content">
+    <view class="content_title">
+      <image src="/resource/classes.png" />
+      <text>班级列表</text>
+    </view>
+    <view class="none_data" wx:if="{{classes_list.length === 0}}">暂无数据</view>
+    <block wx:else="{{classes_list.length > 0}}">
+        <block wx:for="{{classes_list}}" wx:key="index">
+            <view class="classes_content">
+                <image src="{{item.class_url}}" mode="aspectFill"/>
+                <view>
+                    <text>{{item.class_name}}</text>
+                    <text>{{item.class_ofCollege}}</text>
+                    <view>
+                        <button type="primary" style="margin-right: 10px;" data-id="{{item._id}}" bindtap="editClass">编辑</button>
+                        <button type="warn" data-id="{{item._id}}" bindtap="deleteClass">删除</button>
+                    </view>
+                </view>
+                
+            </view>
+        </block>
+        
+    </block>
+</view>
+<view class="circle_add" bindtap="toAddClass">+</view>

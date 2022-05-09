@@ -1,0 +1,78 @@
+/* components/admins/match/match.wxss */
+
+.circle_add{
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    right: 20px;
+    box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+    background-color: seagreen;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+    bottom: 100px;
+}
+.content{
+    background-color:#ffffff;
+    border-radius: 6px;
+    width: 81%;
+    height: auto;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+    display: flex;
+    padding: 20px;
+    padding-bottom: 30px;
+    flex-direction: column;
+    margin-bottom: 100px;
+    margin-top: 30px;
+}
+.content_title{
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+}
+.content_title image{
+    width: 35px;
+    height: 35px;
+    display: inline;
+    margin-right: 5px;
+}
+.none_data{
+    text-align: center;
+    padding: 40px;
+    height: 40px;
+    font-size: 25px;
+    color: rgba(0, 0, 0, 0.3);
+}
+.match_content{
+    margin-top: 20px;
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    display: inline-flex;
+    flex-direction: row;
+    align-items:flex-start;
+    padding-bottom: 20px;
+}
+.match_content image{
+    margin-right: 20px;
+    width: 150px;
+    height: 100px;
+    box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+}
+.match_content view{
+    margin-left: 10px;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+}
+
+.match_content>view>view{
+    margin-left: 0px;
+    margin-top:40px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}

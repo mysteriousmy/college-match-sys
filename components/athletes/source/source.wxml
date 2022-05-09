@@ -1,0 +1,82 @@
+<!--components/athletes/match/match.wxml-->
+<scroll-view>
+    <view class="search_bar">
+        <image src="/resource/search_single.png"></image>
+        <input bindinput="inputChange" value="{{seach_word}}" type="text" placeholder="请输入比赛关键字" />
+        <button bindtap="seachMatchData">搜索</button>
+    </view>
+    <view class="search_result">
+        <view class="dynmic_title">
+            <image src="/resource/source_color.png" />
+            <text>成绩结果</text>
+        </view>
+        <view class="none_data" wx:if="{{match_data.length === 0}}">暂无数据</view>
+        <block wx:else="{{match_data.length > 0}}">
+            <block wx:for="{{match_data}}" wx:key="index">
+                <view class="dynmic_content" data-id="{{item.id}}" bindtap="openMatchModal">
+                    <image src="{{item.match_url}}" mode="aspectFill" />
+                    <view>
+                        <text>{{item.match_title}}</text>
+                        <text style="color: red;font-size: 13px;">比赛得分：{{item.source}}（点击查看更多）</text>
+                        <text class="modal_desc">{{item.match_desc}}</text>
+                    </view>
+                </view>
+            </block>
+        </block>
+    </view>
+</scroll-view>
+
+<view class="modal" wx:if="{{showModalOfMatch}}">
+    <view class="modal_head">
+        <view style="width: 40px;height: 40px;"></view>
+        <image class="close_btn" bindtap="closeModal" src="/resource/icon_close_gray.png" />
+    </view>
+    <scroll-view scroll-y class="scroll_modal">
+        <view class="none_data" wx:if="{{sort_data.length === 0}}">暂无数据</view>
+        <block wx:if="{{sort_data.length > 0}}" wx:key="index">
+            <block wx:for="{{sort_data}}">
+                <view class="modal_content_head" data-id="{{item.id}}" bindtap="openAlthetesMoal">
+                    <view style="display: flex;align-items: center;">
+                        <text style="font-weight: 900;font-size: 20px;margin-right: 20px;">{{index+1}}</text>
+                        <image src="{{item.althetes_photo}}" mode="aspectFill" />
+                        <text style="font-weight: 900; font-size: 25px;">{{item.althetes_name}}</text>
+                    </view>
+                    <text>成绩：{{item.source}}</text>
+                </view>
+            </block>
+        </block>
+
+    </scroll-view>
+</view>
+
+
+
+<view class="modal modal_ath" wx:if="{{showModalOfAlthetes}}">
+    <scroll-view style="margin-top: 60px" scroll-y class="scroll_modal">
+        <view class="header">
+            <image src="{{althetes_modal_info.althetes_url}}" mode="aspectFill" />
+        </view>
+        <view class="info">
+            <view class="text_info">
+                <text>姓名：{{althetes_modal_info.althetes_name}}</text>
+                <text>性别：{{althetes_modal_info.althetes_gender}}</text>
+            </view>
+            <view class="text_info">
+                <text>身高：{{althetes_modal_info.althetes_high}}cm</text>
+                <text>体重：{{althetes_modal_info.althetes_weight}}斤</text>
+            </view>
+            <view class="text_info">
+                <text>擅长：{{althetes_modal_info.althetes_adept}}</text>
+                <text>总积分：{{all_source}}</text>
+            </view>
+            <view class="text_info">
+                <text>班级：{{althetes_modal_info.althetes_ofClass}}</text>
+                <text>学院：{{althetes_modal_info.althetes_ofCollege}}</text>
+            </view>
+            <view class="text_info">
+                <text>简介：{{althetes_modal_info.althetes_desc.length === 0 ? '这个人很懒，没有自我介绍':althetes_modal_info.althetes_desc}}</text>
+            </view>
+            <button style="margin-top: 20px;" type="primary" bindtap="closeAthModal">关闭</button>
+        </view>
+    </scroll-view>
+</view>

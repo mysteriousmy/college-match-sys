@@ -1,0 +1,53 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/sort/sort",
+        "pages/mypage/mypage",
+        "pages/search/search",
+        "pages/admins/login/adminLogin",
+        "pages/admins/home/adminHome",
+        "pages/athletes/login/athletesLogin",
+        "pages/athletes/home/athletesHome",
+        "pages/admins/bannerAdd/bannerAdd",
+        "pages/admins/collegeEdit/collegeEdit",
+        "pages/admins/classesEdit/classesEdit",
+        "pages/admins/althetesEdit/althetesEdit",
+        "pages/admins/matchEdit/matchEdit",
+        "pages/detail/detail",
+        "pages/myCollect/myCollect",
+        "pages/myComments/myComments"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "高校运动会比赛系统",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "color": "#a9b7b7",
+        "selectedColor": "1296db",
+        "borderStyle": "white",
+        "list": [
+            {
+                "selectedIconPath": "resource/home_select.png",
+                "iconPath": "resource/home.png",
+                "pagePath": "pages/index/index",
+                "text": "首页"
+            },
+            {
+                "selectedIconPath": "resource/sort_select.png",
+                "iconPath": "resource/sort.png",
+                "pagePath": "pages/sort/sort",
+                "text": "排行榜"
+            },
+            {
+                "selectedIconPath": "resource/user_select.png",
+                "iconPath": "resource/user.png",
+                "pagePath": "pages/mypage/mypage",
+                "text": "我的"
+            }
+        ]
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,43 @@
+<view class="editContent">
+    <view class="content">
+        <text>班级名称：</text>
+        <input id="class_name" value="{{class_name}}" bindinput="inputChange" type="text" placeholder="请输入班级名称" />
+    </view>
+    <view class="content">
+        <text>班级简介：</text>
+        <input id="class_desc" value="{{class_desc}}" bindinput="inputChange" type="text" placeholder="请输入班级信息（非必要）" />
+    </view>
+    <view class="content">
+        <text>所属学院：</text>
+        <text bindtap="selectStockOutType">{{select_college === "" ? "点击选择所属学院" : select_college}}</text>
+     
+    </view>
+    <view class="content">
+        <text>班级标志（图片）类型：</text>
+        <radio-group bindchange="bandleChange">
+            <radio color="red" value="url" checked="true">在线地址</radio>
+            <radio color="red" value="file">上传文件</radio>
+        </radio-group>
+    </view>
+    <block wx:if="{{class_type}}">
+        <view class="content">
+            <text>班级标志（图片）地址：</text>
+            <input id="fileUrl" value="{{fileUrl}}" bindinput="inputChange" type="text" placeholder="请输入在线图片地址" />
+        </view>
+    </block>
+    <block wx:if="{{!class_type}}">
+        <view class="content">
+            <text>标志文件：</text>
+            <button bindtap="chooseImg" type="primary" >上传图片</button>
+        </view>
+    </block>
+    
+    <image style="margin-top:20px; height: 300px;" src="{{fileUrl}}" wx:if="{{showImage}}" mode="aspectFill"/>
+    <view class="content">
+        <button wx:if="{{!editOrAddFlag}}" bindtap="saveClassData" type="primary" style="margin-right: 20px;">保存</button>
+        <button wx:if="{{editOrAddFlag}}" bindtap="updateClassData" type="primary" style="margin-right: 20px;">保存</button>
+        <button bindtap="disableSave" type="warn">取消</button>
+    </view>
+
+</view>
+<select id="select" options="{{options}}"  topsHeight="{{topsHeight}}" opacity="{{opacity}}" IsSingle="{{IsSingle}}" bind:OnSelectFinish="SelectFinish"></select>

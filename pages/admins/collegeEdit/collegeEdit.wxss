@@ -1,0 +1,13 @@
+/* pages/admins/bannerAdd/bannerAdd.wxss */
+.editContent{
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+}
+.content{
+    margin-top: 30px;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
